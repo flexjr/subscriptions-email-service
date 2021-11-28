@@ -1,0 +1,41 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: flexjr-subscriptions-email-service
+useDotenv: true
+plugins:
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+  memorySize: 512
+  timeout: 10
+  logRetentionInDays: 7
+
+  region: ap-southeast-1
+  apiGateway:
+    shouldStartNameWithService: true
+
+functions:
+  aggregated-email:
+    handler: app.aggregated_email
+    environment:
+      MAILGUN_API_KEY: ${env:MAILGUN_API_KEY}
+      MAILGUN_DOMAIN: ${env:MAILGUN_DOMAIN}
+    events:
+      - http:
+          path: smartfin/aggregated_email
+          method: post
+          cors: true
