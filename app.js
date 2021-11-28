@@ -25,7 +25,7 @@ exports.subscription_status = (event, context) => {
   if (status == "success") {
     const email = {
         body: {
-          name: "JJ Goi",
+          name: requestBody.name,
           intro:
             "Thank you for upgrading!",
           action: {
@@ -63,7 +63,7 @@ exports.subscription_status = (event, context) => {
   } else if (status == "failed") {
     const email = {
         body: {
-          name: "JJ Goi",
+          name: requestBody.name,
           intro:
             "Your payment for a Flex subscription plan has failed, so you’ve not been charged.",
           action: {
