@@ -29,13 +29,13 @@ provider:
     shouldStartNameWithService: true
 
 functions:
-  aggregated-email:
-    handler: app.aggregated_email
+  subscription-status:
+    handler: app.subscription_status
     environment:
       MAILGUN_API_KEY: ${env:MAILGUN_API_KEY}
       MAILGUN_DOMAIN: ${env:MAILGUN_DOMAIN}
     events:
       - http:
-          path: smartfin/aggregated_email
+          path: emails/subscription_status
           method: post
           cors: true
